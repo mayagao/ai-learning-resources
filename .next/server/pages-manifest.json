@@ -1,8 +1,0 @@
-{
-  "/_app": "pages/_app.js",
-  "/_error": "pages/_error.js",
-  "/_document": "pages/_document.js",
-  "/ai-fundamentals": "pages/ai-fundamentals.js",
-  "/getting-started": "pages/getting-started.js",
-  "/design-tools": "pages/design-tools.js"
-}
