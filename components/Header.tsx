@@ -67,7 +67,6 @@ export function Header({ onMenuToggle, sidebarOpen }: HeaderProps) {
     >
       {!sidebarOpen && (
         <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-          <MarkGithubIcon size={24} />
           <button
             onClick={onMenuToggle}
             style={{
@@ -82,6 +81,7 @@ export function Header({ onMenuToggle, sidebarOpen }: HeaderProps) {
           >
             <ThreeBarsIcon size={16} />
           </button>
+          <MarkGithubIcon size={24} />
         </div>
       )}
 

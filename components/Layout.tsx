@@ -1,12 +1,19 @@
 import React, { useState } from "react";
 import { Sidebar } from "./Sidebar";
 import { Header } from "./Header";
+import { NavigationSection } from "../utils/navigation";
 
 interface LayoutProps {
   children: React.ReactNode;
+  frontmatter?: any;
+  navigationSections?: NavigationSection[];
 }
 
-export function Layout({ children }: LayoutProps) {
+export function Layout({
+  children,
+  frontmatter,
+  navigationSections = [],
+}: LayoutProps) {
   const [sidebarState, setSidebarState] = useState<"open" | "closed">("open");
 
   const toggleSidebar = () => {
@@ -18,6 +25,7 @@ export function Layout({ children }: LayoutProps) {
       <Sidebar
         isOpen={sidebarState === "open"}
         onClose={() => setSidebarState("closed")}
+        navigationSections={navigationSections}
       />
 
       <div

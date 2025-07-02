@@ -1,3 +1,11 @@
+---
+title: Image Generation
+description: Create stunning visuals with AI image generation tools
+icon: beaker
+order: 2
+section: examples
+---
+
 # AI Image Generation for Design
 
 Complete workflow and examples for using AI image generation tools in professional design projects.

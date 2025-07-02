@@ -1,3 +1,11 @@
+---
+title: Prompt Engineering
+description: Master the art of crafting effective AI prompts for design
+icon: paintbrush
+order: 1
+section: examples
+---
+
 # Prompt Engineering for Designers
 
 A comprehensive example of how to craft effective prompts for AI tools, with templates and real-world applications.

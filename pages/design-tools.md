@@ -1,3 +1,11 @@
+---
+title: Design Tools
+description: Essential AI-powered tools for modern designers
+icon: code
+order: 3
+section: main
+---
+
 # AI-Powered Design Tools
 
 A curated guide to the most useful AI tools for designers, from beginner-friendly to advanced applications.

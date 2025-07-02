@@ -31,6 +31,114 @@ A comprehensive documentation site built with Next.js and Markdoc to help design
    http://localhost:3000
    ```
 
+## Adding New Pages
+
+### Step 1: Create the Markdown File
+
+Create a new `.md` file in the appropriate directory:
+
+- **Documentation pages**: `pages/your-page-name.md`
+- **Example pages**: `examples/your-example/README.md`
+
+### Step 2: Add Frontmatter
+
+Add frontmatter at the top of your markdown file:
+
+```markdown
+---
+title: Your Page Title
+description: Brief description of your page
+icon: book
+order: 1
+section: main
+---
+
+# Your Page Title
+
+Your content here...
+```
+
+**Frontmatter Options:**
+
+- `title` - Display name in navigation (required)
+- `description` - Page description for SEO
+- `icon` - Icon name from available icons (optional)
+- `order` - Sort order in navigation (optional)
+- `section` - Group pages into sections (optional)
+
+### Step 3: Update Navigation
+
+Add your page to the navigation in `utils/navigation.ts`:
+
+```typescript
+// For documentation pages
+{
+  title: 'Your Page Title',
+  href: '/your-page-name',
+  icon: BookIcon,
+  order: 4,
+}
+
+// For example pages
+{
+  title: 'Your Example',
+  href: '/examples/your-example',
+  icon: BeakerIcon,
+  order: 4,
+}
+```
+
+### Step 4: Choose an Icon
+
+Available icons from Primer Octicons:
+
+- `BookIcon` - Documentation, guides
+- `CodeIcon` - Tools, development
+- `GraphIcon` - Analytics, data
+- `BeakerIcon` - Experiments, examples
+- `PaintbrushIcon` - Design, creative
+- `RocketIcon` - Getting started, launch
+- `GearIcon` - Settings, automation
+
+### Example: Adding a "Best Practices" Page
+
+1. **Create file**: `pages/best-practices.md`
+
+```markdown
+---
+title: Best Practices
+description: Essential guidelines for AI-powered design
+icon: gear
+order: 4
+section: main
+---
+
+# Best Practices for AI Design
+
+Essential guidelines and recommendations...
+```
+
+2. **Update navigation** in `utils/navigation.ts`:
+
+```typescript
+{
+  title: 'Best Practices',
+  href: '/best-practices',
+  icon: GearIcon,
+  order: 4,
+}
+```
+
+3. **Test**: Run `npm run dev` and check the sidebar
+
+### Navigation Sections
+
+Pages are organized into sections:
+
+- **Documentation** (`section: main`): Core documentation
+- **Examples** (`section: examples`): Practical examples
+- **Custom sections**: Create new sections by using different section names
+
 ## Project Structure
 
 ```
@@ -50,9 +158,13 @@ A comprehensive documentation site built with Next.js and Markdoc to help design
 │   ├── getting-started.md
 │   ├── ai-fundamentals.md
 │   └── design-tools.md
+├── utils/
+│   └── navigation.ts   # Navigation configuration
 ├── styles/
 │   └── globals.css     # Global styles with Apple monospace
-└── markdoc.config.js   # Markdoc configuration
+└── markdoc/           # Markdoc schema
+    ├── tags.js        # Custom tags
+    └── nodes.js       # Custom nodes
 ```
 
 ## Writing Documentation

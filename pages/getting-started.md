@@ -1,3 +1,11 @@
+---
+title: Getting Started
+description: Your journey into AI-powered design starts here
+icon: book
+order: 1
+section: main
+---
+
 # Getting Started with AI for Designers
 
 Welcome to your journey into AI-powered design! This guide will help you understand the basics and get you started with practical applications.

@@ -1,3 +1,11 @@
+---
+title: AI Fundamentals
+description: Core concepts and principles of AI for designers
+icon: graph
+order: 2
+section: main
+---
+
 # AI Fundamentals for Designers
 
 Understanding the core concepts will help you make better decisions about which AI tools to use and how to use them effectively.

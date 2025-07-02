@@ -1,3 +1,11 @@
+---
+title: Workflow Automation
+description: Streamline your design process with AI automation
+icon: gear
+order: 3
+section: examples
+---
+
 # AI Workflow Automation for Designers
 
 Streamline repetitive design tasks and enhance your creative process with AI-powered automation.
