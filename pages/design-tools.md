@@ -182,3 +182,15 @@ AI tools evolve rapidly. Stay updated:
 {% callout type="warning" title="Version Control" %}
 Always keep non-AI versions of critical assets. AI tools can change behavior with updates.
 {% /callout %}
+
+## The Design Challenges of AI Systems
+
+Designing with LLMs means dealing with unpredictability and the need for higher-value abstractions. Data design is as important as UI, requiring integration with APIs and strategies for managing long-term knowledge. The goal is to create systems that make the process from input to output predictable, transparent, and efficient, whether by enhancing existing tools or rethinking how information is processed.
+
+## Putting It All Together
+
+Modern AI systems combine models, context, tools, and prompts to deliver intelligent solutions. User input is processed by an agent, which may use tool calls and external resources. Results are refined and presented to the user. Understanding these components helps designers and engineers build more effective, reliable, and user-friendly AI systems.
+
+## Next Steps
+
+To deepen your understanding, experiment with prompting techniques, explore tools and MCP servers, build simple agents, and learn about different models. Practice combining these concepts in real projects, and remember that mastering AI design is a process of continuous learning and adaptation.

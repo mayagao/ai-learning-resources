@@ -1,232 +1,65 @@
 ---
-title: AI Terminologies
+title: Terminologies
 description: Essential concepts and terms for understanding AI systems
 icon: book
 order: 1
 section: main
 ---
 
-# AI Terminologies
-
-Understanding key AI terminology is crucial for working effectively with AI systems. This guide explains the fundamental concepts you'll encounter.
-
-## 1. Models
-
-**Models** are the core AI systems trained on vast amounts of data to understand and generate human-like responses.
-
-### Types of Models:
-
-- **Large Language Models (LLMs)** - Text understanding and generation (GPT-4, Claude, Gemini)
-- **Vision Models** - Image analysis and generation (DALL-E, Midjourney, Stable Diffusion)
-- **Multimodal Models** - Handle text, images, audio, and video together
-
-{% diagram type="mermaid" %}
-graph TB
-A[Input Data] --> B[AI Model]
-B --> C[Processing]
-C --> D[Output]
-
-E[Training Data] --> F[Model Training]
-F --> G[Trained Model]
-G --> B
-{% /diagram %}
-
-### Key Characteristics:
-
-- **Parameters** - The "size" of the model (billions of parameters)
-- **Context Window** - How much information it can remember at once
-- **Training Cutoff** - When the model's knowledge ends
-
-## 2. Tool Calls
-
-**Tool calls** enable AI models to interact with external systems and perform actions beyond text generation.
-
-{% diagram type="mermaid" %}
-sequenceDiagram
-participant U as User
-participant M as AI Model
-participant T as Tool/API
-
-U->>M: What's the weather in NYC?
-M->>T: get_weather(city='NYC')
-T->>M: temp: 72°F, condition: sunny
-M->>U: It's 72°F and sunny in NYC
-{% /diagram %}
-
-### Common Tool Types:
-
-- **Web Search** - Access real-time information
-- **Code Execution** - Run calculations or scripts
-- **File Operations** - Read, write, or modify files
-- **API Integrations** - Connect to external services
-- **Database Queries** - Retrieve specific data
-
-{% codetabs examples=[
-  {
-    "language": "json",
-    "label": "Tool Call Example",
-    "code": "{\n  \"tool_name\": \"web_search\",\n  \"parameters\": {\n    \"query\": \"latest AI news 2024\",\n    \"max_results\": 5\n  }\n}"
-  },
-  {
-    "language": "json",
-    "label": "Tool Response",
-    "code": "{\n  \"results\": [\n    {\n      \"title\": \"AI Breakthrough in 2024\",\n      \"url\": \"https://example.com/ai-news\",\n      \"snippet\": \"Latest developments...\"\n    }\n  ]\n}"
-  }
-] /%}
-
-## 3. MCP Servers
-
-**Model Context Protocol (MCP) Servers** provide a standardized way for AI models to connect to external resources and tools.
-
-{% diagram type="mermaid" %}
-graph TB
-A[AI Model] --> B[MCP Client]
-B --> C[MCP Server 1<br/>File System]
-B --> D[MCP Server 2<br/>Database]
-B --> E[MCP Server 3<br/>Web APIs]
-
-C --> F[Local Files]
-D --> G[SQL Database]
-E --> H[REST APIs]
-{% /diagram %}
-
-### MCP Benefits:
-
-- **Standardization** - Consistent interface across different tools
-- **Security** - Controlled access to external resources
-- **Modularity** - Easy to add/remove capabilities
-- **Scalability** - Support for complex workflows
-
-### Popular MCP Servers:
-
-- **File System** - Access local files and directories
-- **Database** - Query SQL databases
-- **Web Scraping** - Extract data from websites
-- **Cloud Services** - Integrate with AWS, Google Cloud, etc.
-
-## 4. Agents
-
-**Agents** are AI systems that can autonomously make decisions, use tools, and complete multi-step tasks.
-
-{% diagram type="mermaid" %}
-graph TD
-A[Goal/Task] --> B[Agent]
-B --> C{Planning}
-C --> D[Action 1]
-C --> E[Action 2]
-C --> F[Action 3]
-
-D --> G[Tool Call]
-E --> H[Tool Call]
-F --> I[Tool Call]
-
-G --> J[Evaluate Results]
-H --> J
-I --> J
-
-J --> K{Goal Achieved?}
-K -->|No| C
-K -->|Yes| L[Complete Task]
-{% /diagram %}
-
-### Agent Capabilities:
-
-- **Planning** - Break down complex tasks into steps
-- **Tool Usage** - Select and use appropriate tools
-- **Memory** - Remember previous actions and results
-- **Reasoning** - Make decisions based on context
-- **Iteration** - Refine approach based on feedback
-
-### Agent Types:
-
-- **Reactive Agents** - Respond to immediate inputs
-- **Planning Agents** - Create multi-step strategies
-- **Learning Agents** - Improve over time
-- **Collaborative Agents** - Work together on tasks
-
-## 5. Prompting
-
-**Prompting** is the art and science of communicating effectively with AI models to get desired outputs.
-
-### Prompt Components:
-
-{% codetabs examples=[
-  {
-    "language": "text",
-    "label": "Basic Prompt",
-    "code": "Write a summary of artificial intelligence."
-  },
-  {
-    "language": "text",
-    "label": "Structured Prompt",
-    "code": "ROLE: You are an expert AI researcher\n\nTASK: Write a summary of artificial intelligence\n\nFORMAT: \n- 3 paragraphs\n- Include key applications\n- Use simple language\n\nCONTEXT: This is for a general audience blog post"
-  }
-] /%}
-
-### Prompting Techniques:
-
-**Chain of Thought** - Ask the model to think step by step
-
-```text
-Solve this math problem step by step:
-What is 15% of 240?
-
-Step 1: Convert percentage to decimal
-Step 2: Multiply by the number
-Step 3: Show the final answer
-```
-
-**Few-Shot Learning** - Provide examples
-
-```text
-Classify the sentiment of these reviews:
-
-"Amazing product!" → Positive
-"Terrible quality" → Negative
-"It's okay, nothing special" → Neutral
-
-"Best purchase ever!" → ?
-```
-
 {% diagram type="mermaid" %}
 graph LR
-A[Clear Instructions] --> B[Good Prompt]
-C[Specific Context] --> B
-D[Examples] --> B
-E[Format Requirements] --> B
+%% Styling
+classDef main fill:#f9f9f9,stroke:#343434,stroke-width:1px,border-radius:6px
+classDef optional fill:#f9f9f9,stroke:#666,stroke-width:1px,stroke-dasharray:5 5,border-radius:6px
 
-B --> F[Better AI Output]
+    %% Nodes
+    User(["🧑 User"])
+    Prompt(["Prompt"])
+    Agent(["Agent"])
+    Model(["Model"])
+    Search(["Search Docs"]):::optional
+    DB(["Query DB"]):::optional
+    Output(["Output"])
+
+    %% Flow
+    User --> |"debug"| Prompt
+    Prompt --> Agent
+    Agent --> Model
+    Model -.-> Search & DB
+    Search & DB -.-> Model
+    Model --> Output
+    Output --> |"solution"| User
+
+    %% Styles
+    linkStyle default stroke-width:1px,arrowheadSize:9
+    class User,Prompt,Agent,Model,Output main;
+
 {% /diagram %}
 
-## Putting It All Together
+# Terminologies
 
-Modern AI systems combine all these concepts:
+Understanding the language of artificial intelligence is essential for anyone working with or designing AI systems. This guide provides a concise overview of the fundamental concepts, drawing from practical experience and design perspectives to help you navigate the complexities of modern AI.
 
-{% diagram type="mermaid" %}
-graph TB
-A[User Input] --> B[Agent]
-B --> C[Model Processing]
-C --> D{Need Tools?}
+## Models
 
-D -->|Yes| E[Tool Calls]
-E --> F[MCP Servers]
-F --> G[External Resources]
-G --> H[Tool Results]
-H --> C
+AI models are trained on vast datasets to generate human-like responses. Large Language Models (LLMs) use weights (what they learn) and architecture (how they process) to predict outputs based on context. Their inner workings are mostly opaque, making them unpredictable and challenging to control. Most models are proprietary, though some open models exist. Andrej Karpathy compared the future of LLM systems to a kernel in an emerging OS, using memory and computational tools to solve problems.
 
-D -->|No| I[Direct Response]
-I --> J[User Output]
-C --> J
-{% /diagram %}
+## Contexts
 
-{% callout type="tip" title="Best Practice" %}
-Understanding these terminologies will help you communicate more effectively with AI systems and choose the right approach for your specific needs.
-{% /callout %}
+Professional tasks require rich context, but LLMs can only process a limited amount at once. Their context window restricts input size, and they have minimal long-term memory. Designers use strategies like larger context windows, embeddings, and helper systems to provide relevant information. Collecting context is complex, as LLMs can't directly interact with files or the web. Tools, MCP servers, and orchestrators help gather and deliver the right context, but even with these, LLMs can skip steps or hallucinate, making efficient data flow and interface design crucial.
 
-## Next Steps
+## Tool Calls
 
-1. **Experiment** with different prompting techniques
-2. **Explore** available tools and MCP servers
-3. **Build** simple agents for specific tasks
-4. **Learn** about different model capabilities
-5. **Practice** combining these concepts in real projects
+Tool calls let AI models interact with external resources, overcoming their built-in limitations. Through tool calls, models can access real-time data, run code, manipulate files, connect to APIs, and query databases. For example, a model can fetch weather data by calling an API and presenting the result conversationally. These interactions are managed through standardized protocols, ensuring security, modularity, and scalability, and are essential for building flexible, powerful AI systems.
+
+## MCP Servers
+
+Model Context Protocol (MCP) servers act as intermediaries, giving AI models secure, modular access to files, databases, web APIs, and cloud services. MCP servers standardize how models connect to external tools, making it easier to add new capabilities and build complex workflows. This approach supports scalability and adaptability, allowing AI systems to leverage a wide range of resources as requirements evolve.
+
+## Agents
+
+Agents are AI systems that can make decisions, use tools, and complete multi-step tasks autonomously. They receive a goal, plan actions, use tools, and iterate based on feedback until the task is done. Agents can plan, remember, reason, and refine their approach. Types include reactive agents (respond to inputs), planning agents (develop strategies), learning agents (improve over time), and collaborative agents (work together on tasks).
+
+## Prompting
+
+Prompting is about crafting instructions to get the best results from AI models. Effective prompts are specific, define roles, clarify objectives, and provide examples, similar to giving clear instructions to a person. Prompting styles vary: creative tasks may need open-ended prompts, while consistent outputs require detailed examples. Techniques like chain-of-thought prompting and few-shot learning help guide model responses. Each model behaves differently, so experimentation is key.

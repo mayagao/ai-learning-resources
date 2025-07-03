@@ -140,7 +140,7 @@ export function Diagram({ type = "mermaid", children }: DiagramProps) {
 
   return (
     <div className="my-6">
-      <div className="p-6 bg-white border border-gray-200 rounded-lg shadow-sm">
+      <div className="p-6 rounded-lg bg-zinc-50">
         {isLoading && (
           <div className="flex items-center justify-center py-8">
             <div className="flex items-center space-x-2 text-gray-500">
