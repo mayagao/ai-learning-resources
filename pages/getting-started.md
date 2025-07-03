@@ -1,18 +1,14 @@
 ---
-title: Getting Started
+title: Core concepts
 description: Your journey into AI-powered design starts here
 icon: book
 order: 1
 section: main
 ---
 
-# Getting Started with AI for Designers
+# Core concepts
 
 Welcome to your journey into AI-powered design! This guide will help you understand the basics and get you started with practical applications.
-
-{% callout type="info" title="New to AI?" %}
-Don't worry! We'll start with the fundamentals and build up to practical applications step by step.
-{% /callout %}
 
 ## What is AI in Design?
 

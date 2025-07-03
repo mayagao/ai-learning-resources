@@ -26,32 +26,29 @@ export interface NavigationSection {
 export const getNavigationSections = (): NavigationSection[] => {
   return [
     {
-      title: "Documentation",
-      order: 0,
+      title: "Get Started",
+      order: 1,
       items: [
         {
           title: "Getting Started",
           href: "/getting-started",
-          icon: BookIcon,
           order: 1,
         },
         {
           title: "AI Fundamentals",
           href: "/ai-fundamentals",
-          icon: GraphIcon,
           order: 2,
         },
         {
           title: "Design Tools",
           href: "/design-tools",
-          icon: CodeIcon,
           order: 3,
         },
       ],
     },
     {
       title: "Examples",
-      order: 1000,
+      order: 2,
       items: [
         {
           title: "Prompt Engineering",

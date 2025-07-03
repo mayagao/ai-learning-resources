@@ -3,7 +3,6 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import {
   XIcon,
-  SidebarCollapseIcon,
   MarkGithubIcon,
   ChevronDownIcon,
   ChevronRightIcon,
@@ -20,20 +19,10 @@ export function Sidebar({ isOpen, onClose, navigationSections }: SidebarProps) {
   const router = useRouter();
   const [expandedItems, setExpandedItems] = useState<Set<string>>(new Set());
 
-  const toggleExpanded = (href: string) => {
-    const newExpanded = new Set(expandedItems);
-    if (newExpanded.has(href)) {
-      newExpanded.delete(href);
-    } else {
-      newExpanded.add(href);
-    }
-    setExpandedItems(newExpanded);
-  };
-
   const isItemActive = (item: NavigationItem): boolean => {
     if (router.pathname === item.href) return true;
     if (item.children) {
-      return item.children.some((child) => isItemActive(child));
+      return item.children.some((child: NavigationItem) => isItemActive(child));
     }
     return false;
   };
@@ -42,76 +31,27 @@ export function Sidebar({ isOpen, onClose, navigationSections }: SidebarProps) {
     const isActive = isItemActive(item);
     const hasChildren = item.children && item.children.length > 0;
     const isExpanded = expandedItems.has(item.href);
-    const paddingLeft = 12 + level * 16;
+    const paddingLeft = 0;
 
     return (
-      <li key={item.href} style={{ marginBottom: level === 0 ? "8px" : "4px" }}>
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: "4px",
-          }}
-        >
-          {hasChildren ? (
-            <button
-              onClick={() => toggleExpanded(item.href)}
-              style={{
-                background: "none",
-                border: "none",
-                cursor: "pointer",
-                padding: "8px 4px",
-                color: "#586069",
-                display: "flex",
-                alignItems: "center",
-                minWidth: "24px",
-              }}
-            >
-              {isExpanded ? (
-                <ChevronDownIcon size={12} />
-              ) : (
-                <ChevronRightIcon size={12} />
-              )}
-            </button>
-          ) : (
-            <div style={{ width: "24px" }} />
-          )}
-
+      <li key={item.href} className={level === 0 ? "mb-1" : "mb-1"}>
+        <div className="flex items-center">
           <Link
             href={item.href}
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: "8px",
-              padding: "8px 12px",
-              paddingLeft: `${paddingLeft}px`,
-              borderRadius: "4px",
-              color: isActive ? "#0366d6" : "#586069",
-              backgroundColor: isActive ? "#f1f8ff" : "transparent",
-              textDecoration: "none",
-              transition: "all 0.2s ease",
-              fontWeight: isActive ? "600" : "400",
-              fontSize: level === 0 ? "14px" : "13px",
-              flex: 1,
-            }}
-            onMouseEnter={(e) => {
-              if (!isActive) {
-                e.currentTarget.style.backgroundColor = "#f1f3f4";
-              }
-            }}
-            onMouseLeave={(e) => {
-              if (!isActive) {
-                e.currentTarget.style.backgroundColor = "transparent";
-              }
-            }}
+            className={`flex items-center gap-2 py-1.5 px-3 rounded-lg flex-1 no-underline transition-all duration-200 hover:bg-gray-100 ${
+              level === 0 ? "text-base" : "text-sm"
+            } ${
+              isActive
+                ? "text-zinc-800 bg-zinc-100 font-medium"
+                : "text-zinc-700 font-normal"
+            }`}
           >
-            {item.icon && level === 0 && <item.icon size={16} />}
             {item.title}
           </Link>
         </div>
 
         {hasChildren && isExpanded && (
-          <ul style={{ listStyle: "none", marginTop: "4px" }}>
+          <ul className="list-none mt-1">
             {item.children!.map((child) =>
               renderNavigationItem(child, level + 1)
             )}
@@ -122,56 +62,30 @@ export function Sidebar({ isOpen, onClose, navigationSections }: SidebarProps) {
   };
 
   return (
-    <aside className={`sidebar ${isOpen ? "open" : ""}`}>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          marginBottom: "24px",
-        }}
-      >
-        <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+    <aside
+      className={`sidebar h-screen flex flex-col bg-zinc-50 border-r border-gray-200 ${
+        isOpen ? "open" : ""
+      }`}
+    >
+      <div className="flex justify-between items-center px-5 py-5 sticky top-0 z-10">
+        <Link
+          href="/"
+          className="flex items-center gap-2 no-underline text-inherit transition-opacity duration-200 hover:opacity-70"
+        >
           <MarkGithubIcon size={24} />
-          <h2 style={{ fontSize: "16px", fontWeight: "600" }}>AI Learning</h2>
-        </div>
-        {isOpen && (
-          <button
-            onClick={onClose}
-            style={{
-              background: "none",
-              border: "none",
-              cursor: "pointer",
-              padding: "4px",
-              color: "#586069",
-              display: "flex",
-              alignItems: "center",
-            }}
-            title="Collapse sidebar"
-          >
-            <SidebarCollapseIcon size={16} />
-          </button>
-        )}
+          <h2 className="text-base font-semibold m-0">AI Design Resources</h2>
+        </Link>
       </div>
 
-      <nav>
+      <nav className="flex-1 overflow-y-auto px-3">
         {navigationSections.map((section, sectionIndex) => (
-          <div key={section.title} style={{ marginBottom: "24px" }}>
+          <div key={section.title} className="mb-6">
             {sectionIndex > 0 && (
-              <h3
-                style={{
-                  fontSize: "12px",
-                  fontWeight: "600",
-                  marginBottom: "12px",
-                  color: "#586069",
-                  textTransform: "uppercase",
-                  letterSpacing: "0.5px",
-                }}
-              >
+              <h3 className="text-sm ml-3 font-medium mb-3 text-zinc-500 ">
                 {section.title}
               </h3>
             )}
-            <ul style={{ listStyle: "none" }}>
+            <ul className="list-none">
               {section.items.map((item) => renderNavigationItem(item))}
             </ul>
           </div>

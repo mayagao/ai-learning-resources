@@ -9,22 +9,23 @@ interface CalloutProps {
 
 const calloutStyles = {
   info: {
-    backgroundColor: "#f6f8fa",
-    borderColor: "#0366d6",
+    containerClass:
+      "bg-github-bg-tertiary border-github-link border-l-github-link",
     icon: InfoIcon,
-    iconColor: "#0366d6",
+    iconClass: "text-github-link",
+    titleClass: "text-github-link",
   },
   warning: {
-    backgroundColor: "#fffdf7",
-    borderColor: "#ffd33d",
+    containerClass: "bg-yellow-50 border-yellow-400 border-l-yellow-400",
     icon: AlertIcon,
-    iconColor: "#ffd33d",
+    iconClass: "text-yellow-500",
+    titleClass: "text-yellow-600",
   },
   success: {
-    backgroundColor: "#f0fff4",
-    borderColor: "#28a745",
+    containerClass: "bg-green-50 border-green-500 border-l-green-500",
     icon: CheckCircleIcon,
-    iconColor: "#28a745",
+    iconClass: "text-green-600",
+    titleClass: "text-green-700",
   },
 };
 
@@ -34,33 +35,18 @@ export function Callout({ type = "info", title, children }: CalloutProps) {
 
   return (
     <div
-      style={{
-        backgroundColor: style.backgroundColor,
-        border: `1px solid ${style.borderColor}`,
-        borderLeft: `4px solid ${style.borderColor}`,
-        borderRadius: "6px",
-        padding: "16px",
-        margin: "16px 0",
-        display: "flex",
-        gap: "12px",
-      }}
+      className={`border border-l-4 rounded-md p-4 my-4 flex gap-3 ${style.containerClass}`}
     >
-      <div style={{ color: style.iconColor, flexShrink: 0, marginTop: "2px" }}>
+      <div className={`flex-shrink-0 mt-0.5 ${style.iconClass}`}>
         <IconComponent size={16} />
       </div>
-      <div style={{ flex: 1 }}>
+      <div className="flex-1">
         {title && (
-          <div
-            style={{
-              fontWeight: "600",
-              marginBottom: "8px",
-              color: style.iconColor,
-            }}
-          >
+          <div className={`font-semibold mb-2 ${style.titleClass}`}>
             {title}
           </div>
         )}
-        <div style={{ color: "#586069" }}>{children}</div>
+        <div className="text-github-text-secondary">{children}</div>
       </div>
     </div>
   );

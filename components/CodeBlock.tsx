@@ -1,5 +1,6 @@
 import React from "react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+// @ts-ignore
 import { github } from "react-syntax-highlighter/dist/cjs/styles/prism";
 
 interface CodeBlockProps {
@@ -9,22 +10,23 @@ interface CodeBlockProps {
 
 export function CodeBlock({ children, language = "text" }: CodeBlockProps) {
   return (
-    <SyntaxHighlighter
-      language={language}
-      style={github}
-      customStyle={{
-        backgroundColor: "#f6f8fa",
-        border: "1px solid #e1e4e8",
-        borderRadius: "6px",
-        padding: "16px",
-        margin: "16px 0",
-        fontSize: "13px",
-        lineHeight: "1.4",
-        fontFamily:
-          "'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', monospace",
-      }}
-    >
-      {children}
-    </SyntaxHighlighter>
+    <div className="bg-github-bg-tertiary border border-github-border rounded-md p-4 my-4">
+      <SyntaxHighlighter
+        language={language}
+        style={github}
+        customStyle={{
+          backgroundColor: "transparent",
+          border: "none",
+          borderRadius: "0",
+          padding: "0",
+          margin: "0",
+          fontSize: "13px",
+          lineHeight: "1.4",
+          fontFamily: "SF Mono, Monaco, Inconsolata, Roboto Mono, monospace",
+        }}
+      >
+        {children}
+      </SyntaxHighlighter>
+    </div>
   );
 }

@@ -21,37 +21,20 @@ export function Layout({
   };
 
   return (
-    <div style={{ display: "flex", minHeight: "100vh" }}>
+    <div className="flex min-h-screen">
       <Sidebar
         isOpen={sidebarState === "open"}
         onClose={() => setSidebarState("closed")}
         navigationSections={navigationSections}
       />
 
-      <div
-        style={{
-          flex: 1,
-          display: "flex",
-          flexDirection: "column",
-          marginLeft: sidebarState === "open" ? "280px" : "0",
-          transition: "margin-left 0.3s ease",
-          minWidth: 0,
-        }}
-      >
+      <div className="flex-1 flex flex-col min-w-0 h-screen">
         <Header
           onMenuToggle={toggleSidebar}
           sidebarOpen={sidebarState === "open"}
         />
 
-        <main
-          style={{
-            flex: 1,
-            padding: "24px 48px",
-            marginTop: "60px", // Account for fixed header
-            maxWidth: "100%",
-            overflow: "auto",
-          }}
-        >
+        <main className="flex-1 px-4 py-6 md:px-8 overflow-y-auto">
           {children}
         </main>
       </div>

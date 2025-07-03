@@ -5,6 +5,7 @@ import {
   SearchIcon,
   ChevronRightIcon,
   MarkGithubIcon,
+  SidebarCollapseIcon,
 } from "@primer/octicons-react";
 
 interface HeaderProps {
@@ -20,7 +21,7 @@ export function Header({ onMenuToggle, sidebarOpen }: HeaderProps) {
     const path = router.asPath;
     const pathSegments = path.split("/").filter(Boolean);
 
-    // Only include Home in breadcrumbs when sidebar is not visible
+    // Only include AI Learning in breadcrumbs when sidebar is not visible
     const breadcrumbs = !sidebarOpen
       ? [{ label: "AI Learning", href: "/" }]
       : [];
@@ -48,83 +49,58 @@ export function Header({ onMenuToggle, sidebarOpen }: HeaderProps) {
   const breadcrumbs = getBreadcrumbs();
 
   return (
-    <header
-      style={{
-        position: "fixed",
-        top: 0,
-        left: sidebarOpen ? "280px" : 0,
-        right: 0,
-        height: "60px",
-        backgroundColor: "#ffffff",
-        borderBottom: "1px solid #e1e4e8",
-        display: "flex",
-        alignItems: "center",
-        padding: "0 24px",
-        gap: "16px",
-        zIndex: 100,
-        transition: "left 0.3s ease",
-      }}
-    >
+    <header className="h-header bg-white border-b border-github-border flex items-center px-6 gap-4 flex-shrink-0 sticky top-0 z-20">
       {!sidebarOpen && (
-        <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+        <div className="flex items-center gap-2">
+          <MarkGithubIcon size={24} />
           <button
             onClick={onMenuToggle}
-            style={{
-              background: "none",
-              border: "none",
-              cursor: "pointer",
-              padding: "8px",
-              color: "#586069",
-              display: "flex",
-              alignItems: "center",
-            }}
+            className="bg-transparent border-none cursor-pointer p-2 text-github-text-secondary flex items-center hover:text-github-text transition-colors"
           >
             <ThreeBarsIcon size={16} />
           </button>
-          <MarkGithubIcon size={24} />
         </div>
       )}
 
-      <nav
-        style={{ display: "flex", alignItems: "center", gap: "8px", flex: 1 }}
-      >
-        {breadcrumbs.map((crumb, index) => (
-          <React.Fragment key={crumb.href}>
-            {index > 0 && (
-              <span style={{ color: "#586069" }}>
-                <ChevronRightIcon size={12} />
-              </span>
-            )}
-            <a
-              href={crumb.href}
-              style={{
-                color: index === breadcrumbs.length - 1 ? "#24292e" : "#586069",
-                textDecoration: "none",
-                fontSize: "14px",
-                fontWeight: index === breadcrumbs.length - 1 ? "600" : "400",
-              }}
-            >
-              {crumb.label}
-            </a>
-          </React.Fragment>
-        ))}
-      </nav>
-
-      <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
-        <div
-          style={{
-            position: "relative",
-            display: "flex",
-            alignItems: "center",
-          }}
+      {sidebarOpen && (
+        <button
+          onClick={onMenuToggle}
+          className="bg-transparent border-none cursor-pointer p-2 text-github-text-secondary flex items-center hover:text-github-text transition-colors"
+          title="Collapse sidebar"
         >
-          <span
-            style={{
-              position: "absolute",
-              left: "12px",
-              color: "#586069",
-            }}
-          >
+          <SidebarCollapseIcon size={16} />
+        </button>
+      )}
+
+      {!sidebarOpen && (
+        <nav className="flex items-center gap-2 flex-1">
+          {breadcrumbs.map((crumb, index) => (
+            <React.Fragment key={crumb.href}>
+              {index > 0 && (
+                <span className="text-github-text-secondary">
+                  <ChevronRightIcon size={12} />
+                </span>
+              )}
+              <a
+                href={crumb.href}
+                className={`no-underline text-sm hover:underline transition-colors ${
+                  index === breadcrumbs.length - 1
+                    ? "text-github-text font-semibold"
+                    : "text-github-text-secondary font-normal"
+                }`}
+              >
+                {crumb.label}
+              </a>
+            </React.Fragment>
+          ))}
+        </nav>
+      )}
+
+      <div
+        className={`flex items-center gap-4 ${sidebarOpen ? "ml-auto" : ""}`}
+      >
+        <div className="relative flex items-center">
+          <span className="absolute left-3 text-github-text-secondary">
             <SearchIcon size={16} />
           </span>
           <input
@@ -133,24 +109,6 @@ export function Header({ onMenuToggle, sidebarOpen }: HeaderProps) {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="search-input"
-            style={{
-              width: "300px",
-              padding: "8px 12px 8px 36px",
-              border: "1px solid #e1e4e8",
-              borderRadius: "6px",
-              fontSize: "14px",
-              fontFamily: "inherit",
-              backgroundColor: "#fafbfc",
-              outline: "none",
-            }}
-            onFocus={(e) => {
-              e.target.style.backgroundColor = "#ffffff";
-              e.target.style.borderColor = "#0366d6";
-            }}
-            onBlur={(e) => {
-              e.target.style.backgroundColor = "#fafbfc";
-              e.target.style.borderColor = "#e1e4e8";
-            }}
           />
         </div>
       </div>

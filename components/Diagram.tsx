@@ -35,16 +35,7 @@ export function Diagram({ type, content }: DiagramProps) {
   }, [type, content]);
 
   return (
-    <div
-      style={{
-        margin: "16px 0",
-        padding: "16px",
-        backgroundColor: "#f6f8fa",
-        border: "1px solid #e1e4e8",
-        borderRadius: "6px",
-        textAlign: "center",
-      }}
-    >
+    <div className="my-4 p-4 bg-github-bg-tertiary border border-github-border rounded-md text-center">
       <div ref={diagramRef} />
     </div>
   );

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+// @ts-ignore
 import { github } from "react-syntax-highlighter/dist/cjs/styles/prism";
 
 interface CodeExample {
@@ -16,39 +17,24 @@ export function CodeTabs({ examples }: CodeTabsProps) {
   const [activeTab, setActiveTab] = useState(0);
 
   return (
-    <div style={{ margin: "16px 0" }}>
-      <div
-        style={{
-          display: "flex",
-          borderBottom: "1px solid #e1e4e8",
-          marginBottom: "0",
-        }}
-      >
+    <div className="my-4">
+      <div className="flex border-b border-github-border mb-0">
         {examples.map((example, index) => (
           <button
             key={index}
             onClick={() => setActiveTab(index)}
-            style={{
-              padding: "8px 16px",
-              border: "none",
-              background: activeTab === index ? "#f6f8fa" : "transparent",
-              borderBottom:
-                activeTab === index
-                  ? "2px solid #0366d6"
-                  : "2px solid transparent",
-              cursor: "pointer",
-              fontSize: "14px",
-              fontFamily: "inherit",
-              color: activeTab === index ? "#0366d6" : "#586069",
-              transition: "all 0.2s ease",
-            }}
+            className={`px-4 py-2 border-none cursor-pointer text-sm font-inherit transition-all duration-200 ease-in-out border-b-2 ${
+              activeTab === index
+                ? "bg-github-bg-tertiary text-github-link border-b-github-link"
+                : "bg-transparent text-github-text-secondary border-b-transparent hover:text-github-text"
+            }`}
           >
             {example.label || example.language}
           </button>
         ))}
       </div>
 
-      <div style={{ position: "relative" }}>
+      <div className="relative">
         <SyntaxHighlighter
           language={examples[activeTab].language}
           style={github}
