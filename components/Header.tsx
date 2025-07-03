@@ -8,8 +8,6 @@ import {
   SidebarCollapseIcon,
 } from "@primer/octicons-react";
 
-import { ArrowRightFromLine } from "lucide-react";
-
 interface HeaderProps {
   onMenuToggle: () => void;
   sidebarOpen: boolean;
@@ -70,7 +68,7 @@ export function Header({ onMenuToggle, sidebarOpen }: HeaderProps) {
           className="bg-transparent border-none cursor-pointer p-2 text-github-text-secondary flex items-center hover:text-github-text transition-colors"
           title="Collapse sidebar"
         >
-          <ArrowRightFromLine size={16} />
+          <SidebarCollapseIcon size={16} />
         </button>
       )}
 

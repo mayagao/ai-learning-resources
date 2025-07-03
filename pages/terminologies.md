@@ -33,12 +33,12 @@ AI models are trained on vast datasets to generate human-like responses. Large L
 Professional tasks require rich context, but LLMs can only process a limited amount at once. Their **context window** restricts input size, and they have minimal long-term memory. People use strategies like larger context windows, embeddings, and helper systems to provide relevant information. Collecting context is complex, as LLMs can't directly interact with files or the web. Tools/MCP servers help gather and deliver the right context, but even with these, LLMs can skip steps or hallucinate, making efficient data flow and interface design crucial.
 
 {% table %}
-| Model | Provider | Context Window | Input $/1M tokens | Output $/1M tokens |
+| Model | Context Window | Input $/1M tokens | Output $/1M tokens |
 |-------------------------|----------|---------------|-------------------|--------------------|
-| Gemini 2.0 Flash | Google | 1M | $0.10 | $0.40 |
-| GPT-4o | OpenAI | 128K | $2.50 | $10.00 |
-| GPT-4o-mini | OpenAI | 128K | $0.15 | $0.60 |
-| 3.7 Sonnet | Anthropic| 200K | $3.00 | $15.00 |
+| Gemini 2.0 Flash | 1M | $0.10 | $0.40 |
+| GPT-4o | 128K | $2.50 | $10.00 |
+| GPT-4o-mini | 128K | $0.15 | $0.60 |
+| 3.7 Sonnet | 200K | $3.00 | $15.00 |
 {% /table %}
 
 ## Tool Calls
@@ -89,6 +89,8 @@ Agents are AI systems that can make decisions, use tools, and complete multi-ste
 ## Prompting
 
 Prompting is about crafting instructions to get the best results from AI models. Effective prompts are specific, define roles, clarify objectives, and provide examples, similar to giving clear instructions to a person. Prompting styles vary: creative tasks may need open-ended prompts, while consistent outputs require detailed examples. Techniques like chain-of-thought prompting and few-shot learning help guide model responses. Each model behaves differently, so experimentation is key.
+
+_AI quality emerges from the interaction between models, contexts, and prompts - each influencing the others in a dynamic system._
 
 {% link
    source="anthropic"
