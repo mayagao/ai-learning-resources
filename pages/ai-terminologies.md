@@ -96,33 +96,3 @@ Prompting is about crafting instructions to get the best results from AI models.
    length="1 hr read"
    title="Prompt Engineering Overview"
 /%}
-
-{% diagram type="mermaid" %}
-graph LR
-%% Styling
-classDef main fill:#f9f9f9,stroke:#343434,stroke-width:1px,border-radius:6px
-classDef optional fill:#f9f9f9,stroke:#666,stroke-width:1px,stroke-dasharray:5 5,border-radius:6px
-
-    %% Nodes
-    User(["🧑 User"])
-    Prompt(["Prompt"])
-    Agent(["Agent"])
-    Model(["Model"])
-    Search(["Search Docs"]):::optional
-    DB(["Query DB"]):::optional
-    Output(["Output"])
-
-    %% Flow
-    User --> |"debug"| Prompt
-    Prompt --> Agent
-    Agent --> Model
-    Model -.-> Search & DB
-    Search & DB -.-> Model
-    Model --> Output
-    Output --> |"solution"| User
-
-    %% Styles
-    linkStyle default stroke-width:1px,arrowheadSize:9
-    class User,Prompt,Agent,Model,Output main;
-
-{% /diagram %}
