@@ -10,6 +10,11 @@ section: main
 
 This guide provides a concise overview of the fundamental concepts, drawing from practical experience and design perspectives to help you navigate the complexities of modern AI.
 
+{% image
+   src="/images/quality-1.png"
+   alt="AI Technology Concept"
+   caption="Quality of the outputs are dictated by models, prompts, and the contexts. " /%}
+
 ## Models
 
 AI models are trained on vast datasets to generate human-like responses. Large Language Models (LLMs) use **weights** (what they learn) and **architecture** (how they process) to predict outputs based on context. _Andrej Karpathy_ compared the future of LLM systems to a kernel in an emerging OS, using memory and computational tools to solve problems. Some AI models are **multimodal**, handling text, speech, images, or video in one system (e.g., GPT-4o, Gemini 2.0 Pro, Llama 4 Maverick). Others are **specialized** for a single task, like Midjourney (image generation), Whisper (speech recognition), or Copilot (code completion).
@@ -63,6 +68,17 @@ Model Context Protocol (MCP) servers act as intermediaries, giving AI models sec
    title="The Model Context Protocol (MCP)"
 /%}
 
+## Prompting
+
+Prompting is about crafting instructions to get the best results from AI models. Effective prompts are specific, define roles, clarify objectives, and provide examples, similar to giving clear instructions to a person. Prompting styles vary: creative tasks may need open-ended prompts, while consistent outputs require detailed examples. Techniques like chain-of-thought prompting and few-shot learning help guide model responses. Each model behaves differently, so experimentation is key.
+
+{% link
+   source="anthropic"
+   url="https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/overview"
+   length="1 hr read"
+   title="Prompt Engineering Overview"
+/%}
+
 ## Agents
 
 Agents are AI systems that can make decisions, use tools, and complete multi-step tasks autonomously. They receive a goal, plan actions, use tools, and iterate based on feedback until the task is done. Agents can plan, remember, reason, and refine their approach. Types include reactive agents (respond to inputs), planning agents (develop strategies), learning agents (improve over time), and collaborative agents (work together on tasks).
@@ -84,15 +100,4 @@ Agents are AI systems that can make decisions, use tools, and complete multi-ste
    url="https://platform.openai.com/docs/guides/agents"
    length="15 min read"
    title="Building Agents"
-/%}
-
-## Prompting
-
-Prompting is about crafting instructions to get the best results from AI models. Effective prompts are specific, define roles, clarify objectives, and provide examples, similar to giving clear instructions to a person. Prompting styles vary: creative tasks may need open-ended prompts, while consistent outputs require detailed examples. Techniques like chain-of-thought prompting and few-shot learning help guide model responses. Each model behaves differently, so experimentation is key.
-
-{% link
-   source="anthropic"
-   url="https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/overview"
-   length="1 hr read"
-   title="Prompt Engineering Overview"
 /%}

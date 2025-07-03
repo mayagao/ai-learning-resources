@@ -2,6 +2,7 @@ import { CodeTabs } from "../components/CodeTabs";
 import { Callout } from "../components/Callout";
 import { Diagram } from "../components/Diagram";
 import { Link } from "../components/Link";
+import { Image } from "../components/Image";
 import { diagram } from "./schema/Diagram.markdoc.js";
 
 export const codetabs = {
@@ -51,6 +52,42 @@ export const link = {
       type: String,
       required: true,
       errorLevel: "critical",
+    },
+  },
+};
+
+export const image = {
+  render: Image,
+  attributes: {
+    src: {
+      type: String,
+      required: true,
+      errorLevel: "critical",
+    },
+    alt: {
+      type: String,
+      required: true,
+      errorLevel: "critical",
+    },
+    width: {
+      type: [Number, String],
+      required: false,
+    },
+    height: {
+      type: [Number, String],
+      required: false,
+    },
+    className: {
+      type: String,
+      required: false,
+    },
+    caption: {
+      type: String,
+      required: false,
+    },
+    source: {
+      type: String,
+      required: false,
     },
   },
 };
