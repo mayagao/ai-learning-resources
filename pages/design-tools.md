@@ -2,7 +2,7 @@
 title: Design Tools
 description: Essential AI-powered tools for modern designers
 icon: code
-order: 3
+order: 2
 section: main
 ---
 

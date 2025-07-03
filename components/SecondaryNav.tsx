@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 
 interface Heading {
   id: string;
@@ -8,6 +9,7 @@ interface Heading {
 
 export const SecondaryNav: React.FC = () => {
   const [headings, setHeadings] = useState<Heading[]>([]);
+  const router = useRouter();
 
   useEffect(() => {
     // Query all h2 and h3 in the main content area
@@ -32,7 +34,7 @@ export const SecondaryNav: React.FC = () => {
       };
     });
     setHeadings(headingList);
-  }, []);
+  }, [router.asPath]);
 
   if (headings.length === 0) return null;
 

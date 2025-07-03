@@ -1,6 +1,6 @@
 ---
-title: AI Fundamentals
-description: Core concepts and principles of AI for designers
+title: Prototype with AI
+description: How to set up and pick your AI tools
 icon: graph
 order: 2
 section: main

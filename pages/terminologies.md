@@ -12,7 +12,7 @@ This guide provides a concise overview of the fundamental concepts, drawing from
 
 ## Models
 
-AI models are trained on vast datasets to generate human-like responses. Large Language Models (LLMs) use **weights** (what they learn) and **architecture** (how they process) to predict outputs based on context. Their inner workings are mostly opaque, making them unpredictable and challenging to control. Most models are proprietary, though some open models exist. _Andrej Karpathy_ compared the future of LLM systems to a kernel in an emerging OS, using memory and computational tools to solve problems.
+AI models are trained on vast datasets to generate human-like responses. Large Language Models (LLMs) use **weights** (what they learn) and **architecture** (how they process) to predict outputs based on context. _Andrej Karpathy_ compared the future of LLM systems to a kernel in an emerging OS, using memory and computational tools to solve problems. Some AI models are **multimodal**, handling text, speech, images, or video in one system (e.g., GPT-4o, Gemini 2.0 Pro, Llama 4 Maverick). Others are **specialized** for a single task, like Midjourney (image generation), Whisper (speech recognition), or Copilot (code completion).
 
 {% link
    source="youtube"

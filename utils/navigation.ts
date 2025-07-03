@@ -35,14 +35,19 @@ export const getNavigationSections = (): NavigationSection[] => {
           order: 1,
         },
         {
-          title: "AI Fundamentals",
-          href: "/ai-fundamentals",
+          title: "Challenges & Principles",
+          href: "/challenges-and-principles",
+          order: 3,
+        },
+        {
+          title: "Prototype with AI",
+          href: "/prototype-with-ai",
           order: 2,
         },
         {
-          title: "Design Tools",
+          title: "Tools",
           href: "/design-tools",
-          order: 3,
+          order: 4,
         },
       ],
     },
@@ -51,19 +56,25 @@ export const getNavigationSections = (): NavigationSection[] => {
       order: 2,
       items: [
         {
-          title: "Prompt Engineering",
+          title: "A Basic Chatbot",
           href: "/examples/prompt-engineering",
           icon: PaintbrushIcon,
           order: 1,
         },
         {
-          title: "Image Generation",
+          title: "Structured Outputs",
+          href: "/examples/prompt-engineering",
+          icon: PaintbrushIcon,
+          order: 1,
+        },
+        {
+          title: "Connect to MCP",
           href: "/examples/image-generation",
           icon: BeakerIcon,
           order: 2,
         },
         {
-          title: "Workflow Automation",
+          title: "Computer Use",
           href: "/examples/workflow-automation",
           icon: GearIcon,
           order: 3,

@@ -13,6 +13,7 @@
     "@markdoc/next.js": "^0.3.7",
     "@primer/octicons-react": "^19.9.0",
     "gray-matter": "^4.0.3",
+    "lucide-react": "^0.525.0",
     "mermaid": "^10.6.1",
     "next": "14.0.0",
     "react": "^18",

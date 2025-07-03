@@ -80,7 +80,7 @@ export function Sidebar({ isOpen, onClose, navigationSections }: SidebarProps) {
       <nav className="flex-1 overflow-y-auto px-3">
         {navigationSections.map((section, sectionIndex) => (
           <div key={section.title} className="mb-6">
-            {sectionIndex > 0 && (
+            {sectionIndex >= 0 && (
               <h3 className="text-sm ml-3 font-medium mb-3 text-zinc-500 ">
                 {section.title}
               </h3>

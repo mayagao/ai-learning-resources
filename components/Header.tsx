@@ -8,6 +8,8 @@ import {
   SidebarCollapseIcon,
 } from "@primer/octicons-react";
 
+import { ArrowRightFromLine } from "lucide-react";
+
 interface HeaderProps {
   onMenuToggle: () => void;
   sidebarOpen: boolean;
@@ -49,7 +51,7 @@ export function Header({ onMenuToggle, sidebarOpen }: HeaderProps) {
   const breadcrumbs = getBreadcrumbs();
 
   return (
-    <header className="h-header bg-white border-b border-github-border flex items-center px-6 gap-4 flex-shrink-0 sticky top-0 z-20">
+    <header className="py-2 bg-white border-b border-github-border flex items-center px-6 gap-4 flex-shrink-0 sticky top-0 z-20">
       {!sidebarOpen && (
         <div className="flex items-center gap-2">
           <MarkGithubIcon size={24} />
@@ -68,7 +70,7 @@ export function Header({ onMenuToggle, sidebarOpen }: HeaderProps) {
           className="bg-transparent border-none cursor-pointer p-2 text-github-text-secondary flex items-center hover:text-github-text transition-colors"
           title="Collapse sidebar"
         >
-          <SidebarCollapseIcon size={16} />
+          <ArrowRightFromLine size={16} />
         </button>
       )}
 
@@ -100,15 +102,15 @@ export function Header({ onMenuToggle, sidebarOpen }: HeaderProps) {
         className={`flex items-center gap-4 ${sidebarOpen ? "ml-auto" : ""}`}
       >
         <div className="relative flex items-center">
-          <span className="absolute left-3 text-github-text-secondary">
-            <SearchIcon size={16} />
+          <span className="absolute left-3">
+            <SearchIcon className="text-zinc-400" size={16} />
           </span>
           <input
             type="text"
             placeholder="Search documentation..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="search-input"
+            className="search-input text-base bg-white border-none"
           />
         </div>
       </div>
