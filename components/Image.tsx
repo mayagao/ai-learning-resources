@@ -22,7 +22,6 @@ export function Image({
   source,
 }: ImageProps) {
   const [imageError, setImageError] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
 
   // Use source from imageSources if provided, otherwise use src
   const imageSrc = source ? imageSources[source] : src;
@@ -31,12 +30,7 @@ export function Image({
   const isSvg =
     imageSrc.toLowerCase().endsWith(".svg") || imageSrc.includes("svg");
 
-  const handleImageLoad = () => {
-    setIsLoading(false);
-  };
-
   const handleImageError = () => {
-    setIsLoading(false);
     setImageError(true);
   };
 
@@ -73,29 +67,6 @@ export function Image({
   return (
     <figure className={`my-6 ${className}`}>
       <div className="relative">
-        {isLoading && (
-          <div className="flex items-center justify-center py-8 bg-gray-50 rounded-lg">
-            <div className="flex items-center space-x-2 text-gray-500">
-              <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24">
-                <circle
-                  className="opacity-25"
-                  cx="12"
-                  cy="12"
-                  r="10"
-                  stroke="currentColor"
-                  strokeWidth="4"
-                  fill="none"
-                />
-                <path
-                  className="opacity-75"
-                  fill="currentColor"
-                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                />
-              </svg>
-              <span className="text-sm">Loading image...</span>
-            </div>
-          </div>
-        )}
         <NextImage
           src={imageSrc}
           alt={alt}
@@ -113,15 +84,17 @@ export function Image({
               ? parseInt(height.toString())
               : 600
           }
-          onLoad={handleImageLoad}
           onError={handleImageError}
-          className={`${isLoading ? "hidden" : ""} ${
+          className={`${
             isSvg ? "object-contain" : "object-cover"
           } rounded-lg w-full h-auto`}
           style={{
             width: width || "100%",
             height: height || "auto",
           }}
+          priority={true}
+          placeholder="blur"
+          blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
         />
       </div>
       {caption && (
