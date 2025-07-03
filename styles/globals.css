@@ -70,6 +70,7 @@
   }
   h2 {
     font-size: 1.5rem;
+    margin-top: 2rem;
     font-weight: 600;
     line-height: 1.2;
     margin-bottom: 1rem;
@@ -131,4 +132,39 @@
       @apply hidden;
     }
   }
+}
+
+/* Markdoc Table Styling */
+main table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  font-size: 0.97rem;
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+main th,
+main td {
+  padding: 0.5rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid #e1e4e8;
+}
+
+main th {
+  font-weight: 500;
+  color: #24292e;
+}
+
+main tr:last-child td {
+  border-bottom: none;
+}
+
+main tr:hover td {
+  background: #f6f8fa;
+}
+
+main td {
+  color: #343434;
 }

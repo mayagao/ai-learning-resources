@@ -1,6 +1,7 @@
 import { CodeTabs } from "../components/CodeTabs";
 import { Callout } from "../components/Callout";
 import { Diagram } from "../components/Diagram";
+import { Link } from "../components/Link";
 import { diagram } from "./schema/Diagram.markdoc.js";
 
 export const codetabs = {
@@ -27,6 +28,30 @@ export const callout = {
       errorLevel: "critical",
     },
     title: { type: String },
+  },
+};
+
+export const link = {
+  render: Link,
+  attributes: {
+    source: {
+      type: String,
+      required: false,
+    },
+    url: {
+      type: String,
+      required: true,
+      errorLevel: "critical",
+    },
+    length: {
+      type: String,
+      required: false,
+    },
+    title: {
+      type: String,
+      required: true,
+      errorLevel: "critical",
+    },
   },
 };
 
