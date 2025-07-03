@@ -1,8 +1,13 @@
 import React from "react";
-import { InfoIcon, AlertIcon, CheckCircleIcon } from "@primer/octicons-react";
+import {
+  InfoIcon,
+  AlertIcon,
+  CheckCircleIcon,
+  XCircleIcon,
+} from "@primer/octicons-react";
 
 interface CalloutProps {
-  type?: "info" | "warning" | "success";
+  type?: "info" | "warning" | "error" | "tip";
   title?: string;
   children: React.ReactNode;
 }
@@ -21,7 +26,13 @@ const calloutStyles = {
     iconClass: "text-yellow-500",
     titleClass: "text-yellow-600",
   },
-  success: {
+  error: {
+    containerClass: "bg-red-50 border-red-500 border-l-red-500",
+    icon: XCircleIcon,
+    iconClass: "text-red-600",
+    titleClass: "text-red-700",
+  },
+  tip: {
     containerClass: "bg-green-50 border-green-500 border-l-green-500",
     icon: CheckCircleIcon,
     iconClass: "text-green-600",
@@ -30,7 +41,7 @@ const calloutStyles = {
 };
 
 export function Callout({ type = "info", title, children }: CalloutProps) {
-  const style = calloutStyles[type];
+  const style = calloutStyles[type] || calloutStyles.info; // Fallback to info if type is not found
   const IconComponent = style.icon;
 
   return (

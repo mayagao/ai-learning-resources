@@ -30,8 +30,8 @@ export const getNavigationSections = (): NavigationSection[] => {
       order: 1,
       items: [
         {
-          title: "Getting Started",
-          href: "/getting-started",
+          title: "AI Terminologies",
+          href: "/ai-terminologies",
           order: 1,
         },
         {
