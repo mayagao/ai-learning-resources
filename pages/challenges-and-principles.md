@@ -6,6 +6,8 @@ order: 2
 section: get-started
 ---
 
-## Challenges and Principles
+# Challenges and Principles
 
 Designing with LLMs means dealing with unpredictability and the need for higher-value abstractions. Data design is as important as UI, requiring integration with APIs and strategies for managing long-term knowledge. The goal is to create systems that make the process from input to output predictable, transparent, and efficient, whether by enhancing existing tools or rethinking how information is processed.
+
+## Challenges

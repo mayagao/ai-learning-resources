@@ -6,7 +6,7 @@ order: 2
 section: main
 ---
 
-# AI Fundamentals for Designers
+# Prototype with AI
 
 Understanding the core concepts will help you make better decisions about which AI tools to use and how to use them effectively.
 

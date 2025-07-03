@@ -23,7 +23,7 @@ export function CodeTabs({ examples }: CodeTabsProps) {
           <button
             key={index}
             onClick={() => setActiveTab(index)}
-            className={`px-4 py-2 border-none cursor-pointer text-sm font-inherit transition-all duration-200 ease-in-out border-b-2 ${
+            className={`px-4 py-2 border-none cursor-pointer text-sm font-inherit duration-200 ease-in-out border-b-2 ${
               activeTab === index
                 ? "bg-github-bg-tertiary text-github-link border-b-github-link"
                 : "bg-transparent text-github-text-secondary border-b-transparent hover:text-github-text"

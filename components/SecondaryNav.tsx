@@ -39,7 +39,7 @@ export const SecondaryNav: React.FC = () => {
   if (headings.length === 0) return null;
 
   return (
-    <nav className="hidden lg:block sticky top-2 max-h-[80vh] overflow-auto ml-8 w-64 text-base">
+    <nav className="hidden lg:block sticky top-14 max-h-[100vh] w-32 overflow-auto ml-8 w-72 text-base">
       <div className="rounded-lg p-4">
         <ul className="space-y-2">
           {headings.map((heading) => (

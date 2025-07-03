@@ -1,31 +1,32 @@
-import React, { useState } from "react";
+import React from "react";
 import { useRouter } from "next/router";
 import {
   ThreeBarsIcon,
-  SearchIcon,
   ChevronRightIcon,
   MarkGithubIcon,
-  SidebarCollapseIcon,
 } from "@primer/octicons-react";
-
-import { ArrowRightFromLine } from "lucide-react";
+import { Search } from "./Search";
 
 interface HeaderProps {
   onMenuToggle: () => void;
   sidebarOpen: boolean;
+  isMobile?: boolean;
 }
 
-export function Header({ onMenuToggle, sidebarOpen }: HeaderProps) {
-  const [searchQuery, setSearchQuery] = useState("");
+export function Header({
+  onMenuToggle,
+  sidebarOpen,
+  isMobile = false,
+}: HeaderProps) {
   const router = useRouter();
 
   const getBreadcrumbs = () => {
     const path = router.asPath;
     const pathSegments = path.split("/").filter(Boolean);
 
-    // Only include AI Learning in breadcrumbs when sidebar is not visible
+    // Always include AI Design Resources with icon when sidebar is not visible
     const breadcrumbs = !sidebarOpen
-      ? [{ label: "AI Learning", href: "/" }]
+      ? [{ label: "AI Design Resources", href: "/", isHome: true }]
       : [];
 
     let currentPath = "";
@@ -42,7 +43,7 @@ export function Header({ onMenuToggle, sidebarOpen }: HeaderProps) {
       if (segment === "image-generation") label = "Image Generation";
       if (segment === "workflow-automation") label = "Workflow Automation";
 
-      breadcrumbs.push({ label, href: currentPath });
+      breadcrumbs.push({ label, href: currentPath, isHome: false });
     });
 
     return breadcrumbs;
@@ -50,70 +51,47 @@ export function Header({ onMenuToggle, sidebarOpen }: HeaderProps) {
 
   const breadcrumbs = getBreadcrumbs();
 
-  return (
-    <header className="py-2 bg-white border-b border-github-border flex items-center px-6 gap-4 flex-shrink-0 sticky top-0 z-20">
-      {!sidebarOpen && (
-        <div className="flex items-center gap-2">
-          <MarkGithubIcon size={24} />
-          <button
-            onClick={onMenuToggle}
-            className="bg-transparent border-none cursor-pointer p-2 text-github-text-secondary flex items-center hover:text-github-text transition-colors"
-          >
-            <ThreeBarsIcon size={16} />
-          </button>
-        </div>
-      )}
+  // Only hide header on desktop when sidebar is open
+  if (sidebarOpen && !isMobile) {
+    return null;
+  }
 
-      {sidebarOpen && (
+  return (
+    <header className="py-2 bg-white border-b border-github-border flex items-center px-5 gap-2 flex-shrink-0 sticky top-0 z-20 h-14">
+      <div className="flex items-center gap-2">
         <button
           onClick={onMenuToggle}
-          className="bg-transparent border-none cursor-pointer p-2 text-github-text-secondary flex items-center hover:text-github-text transition-colors"
-          title="Collapse sidebar"
+          className="bg-transparent border-none cursor-pointer p-2 text-zinc-400 flex items-center hover:text-github-text transition-colors"
         >
-          <ArrowRightFromLine size={16} />
+          <ThreeBarsIcon size={16} />
         </button>
-      )}
+      </div>
 
-      {!sidebarOpen && (
+      {/* Show breadcrumbs only when sidebar is closed or on mobile when sidebar is open but with simple content */}
+      {(!sidebarOpen || isMobile) && (
         <nav className="flex items-center gap-2 flex-1">
           {breadcrumbs.map((crumb, index) => (
             <React.Fragment key={crumb.href}>
               {index > 0 && (
-                <span className="text-github-text-secondary">
+                <span className="text-zinc-400">
                   <ChevronRightIcon size={12} />
                 </span>
               )}
               <a
                 href={crumb.href}
-                className={`no-underline text-sm hover:underline transition-colors ${
+                className={`no-underline  transition-colors flex items-center gap-2 ${
                   index === breadcrumbs.length - 1
-                    ? "text-github-text font-semibold"
-                    : "text-github-text-secondary font-normal"
+                    ? "text-github-text font-medium"
+                    : "font-medium"
                 }`}
               >
+                {crumb.isHome && <MarkGithubIcon size={24} />}
                 {crumb.label}
               </a>
             </React.Fragment>
           ))}
         </nav>
       )}
-
-      <div
-        className={`flex items-center gap-4 ${sidebarOpen ? "ml-auto" : ""}`}
-      >
-        <div className="relative flex items-center">
-          <span className="absolute left-3">
-            <SearchIcon className="text-zinc-400" size={16} />
-          </span>
-          <input
-            type="text"
-            placeholder="Search documentation..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="search-input text-base bg-white border-none"
-          />
-        </div>
-      </div>
     </header>
   );
 }

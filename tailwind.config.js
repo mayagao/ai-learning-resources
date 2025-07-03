@@ -31,6 +31,9 @@ module.exports = {
       width: {
         sidebar: "280px",
       },
+      margin: {
+        sidebar: "280px",
+      },
       spacing: {
         header: "60px",
       },

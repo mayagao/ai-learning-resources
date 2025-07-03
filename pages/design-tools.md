@@ -6,7 +6,7 @@ order: 2
 section: main
 ---
 
-# AI-Powered Design Tools
+# Tools
 
 A curated guide to the most useful AI tools for designers, from beginner-friendly to advanced applications.
 
