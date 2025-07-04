@@ -37,18 +37,16 @@ AI models are trained on vast datasets to generate human-like responses. Large L
 
 Professional tasks require rich context, but LLMs can only process a limited amount at once. Their **context window** restricts input size, and they have minimal long-term memory. People use strategies like larger context windows, embeddings, and helper systems to provide relevant information. Collecting context is complex, as LLMs can't directly interact with files or the web. Tools/MCP servers help gather and deliver the right context, but even with these, LLMs can skip steps or hallucinate, making efficient data flow and interface design crucial.
 
-{% table %}
-| Model | Context Window | Input $/1M tokens | Output $/1M tokens |
-|-------------------------|---------------|-------------------|--------------------|
-| Gemini 2.0 Flash | 1M | $0.10 | $0.40 |
-| GPT-4o | 128K | $2.50 | $10.00 |
-| GPT-4o-mini | 128K | $0.15 | $0.60 |
-| 3.7 Sonnet | 200K | $3.00 | $15.00 |
-{% /table %}
+{% link
+   source="openai"
+   url="https://www.philschmid.de/context-engineering"
+   length="20 min read"
+   title="The New Skill in AI is Not Prompting, It's Context Engineering"
+/%}
 
-## Tool Calls
+## Tool Calls and Function Calls
 
-Tool calls let AI models interact with external resources, overcoming their built-in limitations. Through tool calls, models can access real-time data, run code, manipulate files, connect to APIs, and query databases. For example, a model can fetch weather data by calling an API and presenting the result conversationally. These interactions are managed through standardized protocols, ensuring security, modularity, and scalability, and are essential for building flexible, powerful AI systems.
+A **function call** is a direct request by code or a model to run a specific function with arguments. For example, asking `get_weather("San Francisco")` and having your system run it immediately. In contrast, a **tool call** is a structured request for an external capability—like `search the web` or `run a calculator` that the model emits as part of its response, but that your system needs to handle manually. Both tool call and function call can involve multiple rounds of completions.
 
 {% link
    source="openai"
@@ -61,6 +59,12 @@ Tool calls let AI models interact with external resources, overcoming their buil
 
 Model Context Protocol (MCP) servers act as intermediaries, giving AI models secure, modular access to files, databases, web APIs, and cloud services. MCP servers standardize how models connect to external tools, making it easier to add new capabilities and build complex workflows. This approach supports scalability and adaptability, allowing AI systems to leverage a wide range of resources as requirements evolve.
 
+{% link
+   source="book"
+   url="https://modelcontextprotocol.io/introduction"
+   length="10 min"
+   title="Get started with the Model Context Protocol (MCP)"
+/%}
 {% link
    source="anthropic"
    url="https://www.youtube.com/watch?v=CQywdSdi5iA"
