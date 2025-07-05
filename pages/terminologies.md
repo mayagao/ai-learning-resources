@@ -10,10 +10,12 @@ section: main
 
 This guide provides a concise overview of the fundamental concepts, drawing from practical experience and design perspectives to help you navigate the complexities of modern AI.
 
-{% image
-   src="/images/quality-1.png"
-   alt="AI Technology Concept"
-   caption="Quality of the outputs are dictated by models, prompts, and the contexts. " /%}
+{% diagram
+   type="concept"
+   title="AI Quality Framework"
+   content="Models -> Quality
+Prompts -> Quality
+Contexts -> Quality" /%}
 
 ## Models
 

@@ -5,8 +5,18 @@ export const diagram = {
     type: {
       type: String,
       default: "mermaid",
-      matches: ["mermaid"],
+      matches: ["mermaid", "flowchart", "concept", "chart", "process"],
       errorLevel: "critical",
+    },
+    title: {
+      type: String,
+      required: false,
+    },
+    theme: {
+      type: String,
+      default: "light",
+      matches: ["light", "dark"],
+      required: false,
     },
     content: {
       type: String,

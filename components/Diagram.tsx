@@ -1,8 +1,15 @@
 import React, { useEffect, useRef, useState } from "react";
 
 interface DiagramProps {
-  type?: "mermaid";
+  type?: "mermaid" | "flowchart" | "concept" | "chart" | "process";
   children: React.ReactNode;
+  title?: string;
+  theme?: "light" | "dark";
+}
+
+interface DiagramRendererProps {
+  content: string;
+  title?: string;
 }
 
 // Helper function to extract text content from React children
@@ -30,18 +37,146 @@ function extractTextContent(children: React.ReactNode): string {
   return String(children || "").trim();
 }
 
-export function Diagram({ type = "mermaid", children }: DiagramProps) {
+// HTML/React based diagram renderers
+function ConceptDiagram({ content, title }: DiagramRendererProps) {
+  const lines = content.split('\n').filter(line => line.trim());
+  const concepts = lines.map(line => {
+    const parts = line.split('->').map(part => part.trim());
+    return parts;
+  });
+
+  return (
+    <div className="concept-diagram">
+      {title && <h3 className="text-lg font-semibold text-center mb-6">{title}</h3>}
+      <div className="flex flex-col space-y-6">
+        {concepts.map((concept, index) => (
+          <div key={index} className="flex items-center justify-center">
+            {concept.length === 1 ? (
+              <div className="bg-blue-100 border-2 border-blue-300 rounded-lg px-6 py-4 text-center max-w-xs">
+                <span className="text-blue-800 font-medium">{concept[0]}</span>
+              </div>
+            ) : (
+              <div className="flex items-center space-x-4">
+                <div className="bg-blue-100 border-2 border-blue-300 rounded-lg px-4 py-3 text-center">
+                  <span className="text-blue-800 font-medium">{concept[0]}</span>
+                </div>
+                <div className="flex items-center">
+                  <div className="h-0.5 w-8 bg-gray-400"></div>
+                  <div className="w-3 h-3 bg-gray-400 transform rotate-45 ml-1"></div>
+                </div>
+                <div className="bg-green-100 border-2 border-green-300 rounded-lg px-4 py-3 text-center">
+                  <span className="text-green-800 font-medium">{concept[1]}</span>
+                </div>
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function FlowchartDiagram({ content, title }: { content: string; title?: string }) {
+  const lines = content.split('\n').filter(line => line.trim());
+  const steps = lines.map((line, index) => {
+    const cleanLine = line.replace(/^\d+\.\s*/, '').trim();
+    return { id: index, text: cleanLine };
+  });
+
+  return (
+    <div className="flowchart-diagram">
+      {title && <h3 className="text-lg font-semibold text-center mb-6">{title}</h3>}
+      <div className="flex flex-col items-center space-y-4">
+        {steps.map((step, index) => (
+          <div key={step.id} className="flex flex-col items-center">
+            <div className="bg-indigo-100 border-2 border-indigo-300 rounded-lg px-6 py-4 text-center max-w-md">
+              <span className="text-indigo-800 font-medium">{step.text}</span>
+            </div>
+            {index < steps.length - 1 && (
+              <div className="flex flex-col items-center mt-2 mb-2">
+                <div className="w-0.5 h-6 bg-gray-400"></div>
+                <div className="w-3 h-3 bg-gray-400 transform rotate-45 -mt-1"></div>
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function ProcessDiagram({ content, title }: { content: string; title?: string }) {
+  const lines = content.split('\n').filter(line => line.trim());
+  const processes = lines.map(line => {
+    const [input, output] = line.split('|').map(part => part.trim());
+    return { input, output };
+  });
+
+  return (
+    <div className="process-diagram">
+      {title && <h3 className="text-lg font-semibold text-center mb-6">{title}</h3>}
+      <div className="grid grid-cols-3 gap-4 items-center">
+        {processes.map((process, index) => (
+          <React.Fragment key={index}>
+            <div className="bg-yellow-100 border-2 border-yellow-300 rounded-lg px-4 py-3 text-center">
+              <span className="text-yellow-800 font-medium">{process.input}</span>
+            </div>
+            <div className="flex justify-center">
+              <div className="bg-purple-100 border-2 border-purple-300 rounded-full px-3 py-2">
+                <span className="text-purple-800 text-sm">Process</span>
+              </div>
+            </div>
+            <div className="bg-green-100 border-2 border-green-300 rounded-lg px-4 py-3 text-center">
+              <span className="text-green-800 font-medium">{process.output}</span>
+            </div>
+          </React.Fragment>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function ChartDiagram({ content, title }: { content: string; title?: string }) {
+  const lines = content.split('\n').filter(line => line.trim());
+  const data = lines.map(line => {
+    const [label, value] = line.split(':').map(part => part.trim());
+    return { label, value: parseFloat(value) || 0 };
+  });
+
+  const maxValue = Math.max(...data.map(d => d.value));
+
+  return (
+    <div className="chart-diagram">
+      {title && <h3 className="text-lg font-semibold text-center mb-6">{title}</h3>}
+      <div className="space-y-4">
+        {data.map((item, index) => (
+          <div key={index} className="flex items-center space-x-4">
+            <div className="w-24 text-sm font-medium text-gray-700">
+              {item.label}
+            </div>
+            <div className="flex-1 bg-gray-200 rounded-full h-4 relative">
+              <div
+                className="bg-blue-500 h-4 rounded-full transition-all duration-500"
+                style={{ width: `${(item.value / maxValue) * 100}%` }}
+              ></div>
+            </div>
+            <div className="w-12 text-sm font-medium text-gray-600">
+              {item.value}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+export function Diagram({ type = "mermaid", children, title, theme = "light" }: DiagramProps) {
   const diagramRef = useRef<HTMLDivElement>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   // Convert children to string content
   const content = extractTextContent(children).trim();
-
-  // Debug logging
-  console.log("Diagram children:", children);
-  console.log("Extracted content:", content);
-  console.log("Content length:", content.length);
 
   useEffect(() => {
     if (!content) {
@@ -99,6 +234,9 @@ export function Diagram({ type = "mermaid", children }: DiagramProps) {
           setError("Failed to load diagram library");
           setIsLoading(false);
         });
+    } else {
+      // For HTML/React diagrams, no loading is needed
+      setIsLoading(false);
     }
   }, [type, content]);
 
@@ -140,7 +278,7 @@ export function Diagram({ type = "mermaid", children }: DiagramProps) {
 
   return (
     <div className="my-6">
-      <div className="p-6 rounded-lg bg-zinc-50">
+      <div className="p-6 rounded-lg bg-gray-50 border border-gray-200">
         {isLoading && (
           <div className="flex items-center justify-center py-8">
             <div className="flex items-center space-x-2 text-gray-500">
@@ -164,10 +302,31 @@ export function Diagram({ type = "mermaid", children }: DiagramProps) {
             </div>
           </div>
         )}
-        <div
-          ref={diagramRef}
-          className={`text-center ${isLoading ? "hidden" : ""}`}
-        />
+        
+        {/* Mermaid diagrams */}
+        {type === "mermaid" && (
+          <div
+            ref={diagramRef}
+            className={`text-center ${isLoading ? "hidden" : ""}`}
+          />
+        )}
+        
+        {/* HTML/React diagrams */}
+        {type === "concept" && !isLoading && (
+          <ConceptDiagram content={content} title={title} />
+        )}
+        
+        {type === "flowchart" && !isLoading && (
+          <FlowchartDiagram content={content} title={title} />
+        )}
+        
+        {type === "process" && !isLoading && (
+          <ProcessDiagram content={content} title={title} />
+        )}
+        
+        {type === "chart" && !isLoading && (
+          <ChartDiagram content={content} title={title} />
+        )}
       </div>
     </div>
   );
