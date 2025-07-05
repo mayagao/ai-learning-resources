@@ -2,7 +2,8 @@ import React, { useEffect, useRef, useState } from "react";
 
 interface DiagramProps {
   type?: "mermaid" | "flowchart" | "concept" | "chart" | "process";
-  children: React.ReactNode;
+  children?: React.ReactNode;
+  content?: string;
   title?: string;
   theme?: "light" | "dark";
 }
@@ -170,13 +171,15 @@ function ChartDiagram({ content, title }: { content: string; title?: string }) {
   );
 }
 
-export function Diagram({ type = "mermaid", children, title, theme = "light" }: DiagramProps) {
+export function Diagram({ type = "mermaid", children, content: contentProp, title, theme = "light" }: DiagramProps) {
   const diagramRef = useRef<HTMLDivElement>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  // Convert children to string content
-  const content = extractTextContent(children).trim();
+  // Use content prop if available, otherwise extract from children
+  const content = contentProp || extractTextContent(children).trim();
+
+  // Debug logging removed - diagram is being parsed correctly
 
   useEffect(() => {
     if (!content) {
@@ -185,12 +188,13 @@ export function Diagram({ type = "mermaid", children, title, theme = "light" }: 
       return;
     }
 
+    setError(null);
+
     if (type === "mermaid" && diagramRef.current) {
       setIsLoading(true);
-      setError(null);
 
       // Load Mermaid dynamically
-      import("mermaid")
+      import("mermaid" as any)
         .then(async (mermaid) => {
           try {
             // Initialize Mermaid with better theme configuration

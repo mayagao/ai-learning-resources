@@ -10,12 +10,7 @@ section: main
 
 This guide provides a concise overview of the fundamental concepts, drawing from practical experience and design perspectives to help you navigate the complexities of modern AI.
 
-{% diagram
-   type="concept"
-   title="AI Quality Framework"
-   content="Models -> Quality
-Prompts -> Quality
-Contexts -> Quality" /%}
+{% diagram type="concept" title="AI Quality Framework" content="Models -> Quality" /%}
 
 ## Models
 
