@@ -46,6 +46,62 @@ function ConceptDiagram({ content, title }: DiagramRendererProps) {
     return parts;
   });
 
+  // Check if this is a hub-and-spoke pattern (multiple items pointing to same target)
+  const targets = concepts.filter(c => c.length === 2).map(c => c[1]);
+  const isHubPattern = targets.length > 1 && targets.every(t => t === targets[0]);
+  const hubTarget = isHubPattern ? targets[0] : null;
+
+  if (isHubPattern && hubTarget) {
+    const sources = concepts.filter(c => c.length === 2).map(c => c[0]);
+    
+    return (
+      <div className="concept-diagram">
+        {title && <h3 className="text-lg font-semibold text-center mb-8">{title}</h3>}
+        <div className="relative flex items-center justify-center" style={{ minHeight: '300px' }}>
+          {/* Central target node */}
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="w-24 h-24 bg-green-100 border-2 border-green-400 rounded-full flex items-center justify-center shadow-lg">
+              <span className="text-green-800 font-semibold text-lg">{hubTarget}</span>
+            </div>
+          </div>
+          
+          {/* Source nodes arranged in a circle */}
+          {sources.map((source, index) => {
+            const angle = (index * 360) / sources.length - 90; // Start from top
+            const radius = 120;
+            const x = Math.cos((angle * Math.PI) / 180) * radius;
+            const y = Math.sin((angle * Math.PI) / 180) * radius;
+            
+            return (
+              <div key={index} className="absolute flex flex-col items-center">
+                <div
+                  className="w-20 h-20 bg-blue-100 border-2 border-blue-400 rounded-full flex items-center justify-center shadow-md"
+                  style={{
+                    transform: `translate(${x}px, ${y}px)`,
+                  }}
+                >
+                  <span className="text-blue-800 font-medium text-sm text-center px-2">{source}</span>
+                </div>
+                
+                {/* Arrow pointing to center */}
+                <div
+                  className="absolute w-16 h-0.5 bg-gray-400"
+                  style={{
+                    transform: `translate(${x * 0.6}px, ${y * 0.6}px) rotate(${angle + 90}deg)`,
+                    transformOrigin: 'left center',
+                  }}
+                >
+                  <div className="absolute right-0 top-0 w-2 h-2 bg-gray-400 transform rotate-45 -translate-y-0.5 translate-x-1"></div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    );
+  }
+
+  // Fallback to original linear layout for non-hub patterns
   return (
     <div className="concept-diagram">
       {title && <h3 className="text-lg font-semibold text-center mb-6">{title}</h3>}
@@ -179,7 +235,7 @@ export function Diagram({ type = "mermaid", children, content: contentProp, titl
   // Use content prop if available, otherwise extract from children
   const content = contentProp || extractTextContent(children).trim();
 
-  // Debug logging removed - diagram is being parsed correctly
+  // Clear any previous error state
 
   useEffect(() => {
     if (!content) {
