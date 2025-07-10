@@ -3,8 +3,10 @@ import NextImage from "next/image";
 import {
   imageSources,
   iconColors,
+  isOcticon,
   ImageSourceKey,
 } from "../utils/imageSources";
+import { renderOcticon } from "../utils/octiconMappings";
 
 interface ImageProps {
   src: string;
@@ -72,8 +74,23 @@ export function Image({
   return (
     <figure className={`my-6 ${className}`}>
       <div className="relative">
-        {isSvg && iconColor ? (
-          // Use CSS mask for colored SVG icons from our predefined sources
+        {isOcticon(imageSrc) ? (
+          // Use imported octicon component with color
+          <div className="flex justify-center">
+            {renderOcticon(imageSrc, {
+              size:
+                typeof width === "number"
+                  ? width
+                  : parseInt(width?.toString() || "48"),
+              style: iconColor
+                ? {
+                    color: iconColor,
+                  }
+                : undefined,
+            })}
+          </div>
+        ) : isSvg && iconColor ? (
+          // Use CSS mask for colored SVG icons from CDN
           <div
             className="rounded-lg w-full"
             style={{

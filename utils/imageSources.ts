@@ -59,23 +59,22 @@ export const imageSources = {
     "https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/midjourney.svg",
   stability:
     "https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/stability.svg",
-  book: "https://cdn.jsdelivr.net/gh/feathericons/feather/icons/book.svg",
-  link: "https://cdn.jsdelivr.net/gh/feathericons/feather/icons/external-link.svg",
-  video: "https://cdn.jsdelivr.net/gh/feathericons/feather/icons/video.svg",
-  audio:
-    "https://cdn.jsdelivr.net/gh/feathericons/feather/icons/headphones.svg",
-  code: "https://cdn.jsdelivr.net/gh/feathericons/feather/icons/code.svg",
-  tool: "https://cdn.jsdelivr.net/gh/feathericons/feather/icons/tool.svg",
-  download:
-    "https://cdn.jsdelivr.net/gh/feathericons/feather/icons/download.svg",
-  play: "https://cdn.jsdelivr.net/gh/feathericons/feather/icons/play.svg",
+  // Octicon keys (will be handled by imported components)
+  book: "octicon-book",
+  link: "octicon-link-external",
+  video: "octicon-video",
+  audio: "octicon-unmute",
+  code: "octicon-code",
+  tool: "octicon-tools",
+  download: "octicon-download",
+  play: "octicon-play",
 } as const;
 
 export const iconColors = {
-  anthropic: "#D4A574",
+  anthropic: "#141413",
   youtube: "#FF0000",
   github: "#181717",
-  openai: "#412991",
+  openai: "#000000",
   figma: "#F24E1E",
   notion: "#000000",
   slack: "#4A154B",
@@ -103,14 +102,20 @@ export const iconColors = {
   replicate: "#000000",
   midjourney: "#000000",
   stability: "#000000",
-  book: "#6B7280",
-  link: "#6B7280",
-  video: "#6B7280",
-  audio: "#6B7280",
-  code: "#6B7280",
-  tool: "#6B7280",
-  download: "#6B7280",
-  play: "#6B7280",
+  // Colors for octicons - using GitHub's colors and neutral grays
+  book: "#656D76",
+  link: "#656D76",
+  video: "#656D76",
+  audio: "#656D76",
+  code: "#656D76",
+  tool: "#656D76",
+  download: "#656D76",
+  play: "#656D76",
 } as const;
+
+// Helper function to check if a source is an octicon
+export const isOcticon = (source: string): boolean => {
+  return source.startsWith("octicon-");
+};
 
 export type ImageSourceKey = keyof typeof imageSources;

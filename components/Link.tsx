@@ -2,8 +2,10 @@ import React from "react";
 import {
   imageSources,
   iconColors,
+  isOcticon,
   ImageSourceKey,
 } from "../utils/imageSources";
+import { renderOcticon } from "../utils/octiconMappings";
 
 interface LinkProps {
   source?: string;
@@ -39,8 +41,19 @@ export function Link({ source, url, length, title }: LinkProps) {
       >
         {imageSrc && (
           <div className="flex-shrink-0">
-            {iconColor ? (
-              // Use CSS mask for colored icons from our predefined sources
+            {isOcticon(imageSrc) ? (
+              // Use imported octicon component with color
+              renderOcticon(imageSrc, {
+                size: 16,
+                className: "w-4 h-4 opacity-70",
+                style: iconColor
+                  ? {
+                      color: iconColor,
+                    }
+                  : undefined,
+              })
+            ) : iconColor ? (
+              // Use CSS mask for colored brand icons from CDN
               <div
                 className="w-4 h-4 opacity-70"
                 style={{

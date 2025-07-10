@@ -11,7 +11,9 @@
   "dependencies": {
     "@markdoc/markdoc": "^0.4.0",
     "@markdoc/next.js": "^0.3.7",
-    "@primer/octicons-react": "^19.9.0",
+    "@primer/octicons-react": "^19.15.3",
+    "@types/cheerio": "^1.0.0",
+    "cheerio": "^1.1.0",
     "gray-matter": "^4.0.3",
     "lucide-react": "^0.525.0",
     "mermaid": "^10.6.1",

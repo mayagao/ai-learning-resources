@@ -60,7 +60,7 @@ A **function call** is a direct request by code or a model to run a specific fun
 Model Context Protocol (MCP) servers act as intermediaries, giving AI models secure, modular access to files, databases, web APIs, and cloud services. MCP servers standardize how models connect to external tools, making it easier to add new capabilities and build complex workflows. This approach supports scalability and adaptability, allowing AI systems to leverage a wide range of resources as requirements evolve.
 
 {% link
-   source="book"
+   source="octicon-book"
    url="https://modelcontextprotocol.io/introduction"
    length="10 min"
    title="Get started with the Model Context Protocol (MCP)"
