@@ -1,5 +1,9 @@
 import React from "react";
-import { imageSources, ImageSourceKey } from "../utils/imageSources";
+import {
+  imageSources,
+  iconColors,
+  ImageSourceKey,
+} from "../utils/imageSources";
 
 interface LinkProps {
   source?: string;
@@ -20,6 +24,10 @@ export function Link({ source, url, length, title }: LinkProps) {
   };
 
   const imageSrc = source ? getImageSrc(source) : undefined;
+  const iconColor =
+    source && source in iconColors
+      ? iconColors[source as ImageSourceKey]
+      : undefined;
 
   return (
     <div className="">
@@ -31,15 +39,30 @@ export function Link({ source, url, length, title }: LinkProps) {
       >
         {imageSrc && (
           <div className="flex-shrink-0">
-            <img
-              src={imageSrc}
-              alt=""
-              className="w-4 h-4 opacity-50 object-contain rounded"
-              onError={(e) => {
-                // Hide image if it fails to load
-                e.currentTarget.style.display = "none";
-              }}
-            />
+            {iconColor ? (
+              // Use CSS mask for colored icons from our predefined sources
+              <div
+                className="w-4 h-4 opacity-70"
+                style={{
+                  backgroundColor: iconColor,
+                  mask: `url(${imageSrc}) no-repeat center`,
+                  maskSize: "contain",
+                  WebkitMask: `url(${imageSrc}) no-repeat center`,
+                  WebkitMaskSize: "contain",
+                }}
+              />
+            ) : (
+              // Fallback to regular img tag for external URLs
+              <img
+                src={imageSrc}
+                alt=""
+                className="w-4 h-4 opacity-50 object-contain rounded"
+                onError={(e) => {
+                  // Hide image if it fails to load
+                  e.currentTarget.style.display = "none";
+                }}
+              />
+            )}
           </div>
         )}
 

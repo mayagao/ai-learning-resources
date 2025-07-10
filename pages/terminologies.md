@@ -10,11 +10,6 @@ section: main
 
 This guide provides a concise overview of the fundamental concepts, drawing from practical experience and design perspectives to help you navigate the complexities of modern AI.
 
-{% image
-   src="/images/quality-1.png"
-   alt="AI Technology Concept"
-   caption="Quality of the outputs are dictated by models, prompts, and the contexts. " /%}
-
 ## Models
 
 AI models are trained on vast datasets to generate human-like responses. Large Language Models (LLMs) use **weights** (what they learn) and **architecture** (how they process) to predict outputs based on context. _Andrej Karpathy_ compared the future of LLM systems to a kernel in an emerging OS, using memory and computational tools to solve problems. Some AI models are **multimodal**, handling text, speech, images, or video in one system (e.g., GPT-4o, Gemini 2.0 Pro, Llama 4 Maverick). Others are **specialized** for a single task, like Midjourney (image generation), Whisper (speech recognition), or Copilot (code completion).
@@ -32,6 +27,11 @@ AI models are trained on vast datasets to generate human-like responses. Large L
    length="40 min video"
    title="Andrej Karpathy: Software Is Changing (Again)"
 /%}
+
+{% image
+   src="/images/terminologies-models.png"
+   alt="AI Technology Concept"
+   caption="Quality of the outputs are dictated by models, prompts, and the contexts. " /%}
 
 ## Contexts
 

@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import NextImage from "next/image";
-import { imageSources, ImageSourceKey } from "../utils/imageSources";
+import {
+  imageSources,
+  iconColors,
+  ImageSourceKey,
+} from "../utils/imageSources";
 
 interface ImageProps {
   src: string;
@@ -25,6 +29,7 @@ export function Image({
 
   // Use source from imageSources if provided, otherwise use src
   const imageSrc = source ? imageSources[source] : src;
+  const iconColor = source ? iconColors[source] : undefined;
 
   // Determine if this is an SVG file
   const isSvg =
@@ -67,35 +72,58 @@ export function Image({
   return (
     <figure className={`my-6 ${className}`}>
       <div className="relative">
-        <NextImage
-          src={imageSrc}
-          alt={alt}
-          width={
-            typeof width === "number"
-              ? width
-              : width
-              ? parseInt(width.toString())
-              : 800
-          }
-          height={
-            typeof height === "number"
-              ? height
-              : height
-              ? parseInt(height.toString())
-              : 600
-          }
-          onError={handleImageError}
-          className={`${
-            isSvg ? "object-contain" : "object-cover"
-          } rounded-lg w-full h-auto`}
-          style={{
-            width: width || "100%",
-            height: height || "auto",
-          }}
-          priority={true}
-          placeholder="blur"
-          blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
-        />
+        {isSvg && iconColor ? (
+          // Use CSS mask for colored SVG icons from our predefined sources
+          <div
+            className="rounded-lg w-full"
+            style={{
+              backgroundColor: iconColor,
+              mask: `url(${imageSrc}) no-repeat center`,
+              maskSize: "contain",
+              WebkitMask: `url(${imageSrc}) no-repeat center`,
+              WebkitMaskSize: "contain",
+              width: width || "100%",
+              height: height || "auto",
+              minHeight:
+                typeof height === "number"
+                  ? height
+                  : height
+                  ? parseInt(height.toString())
+                  : 200,
+            }}
+          />
+        ) : (
+          // Use NextImage for regular images and uncolored SVGs
+          <NextImage
+            src={imageSrc}
+            alt={alt}
+            width={
+              typeof width === "number"
+                ? width
+                : width
+                ? parseInt(width.toString())
+                : 800
+            }
+            height={
+              typeof height === "number"
+                ? height
+                : height
+                ? parseInt(height.toString())
+                : 600
+            }
+            onError={handleImageError}
+            className={`${
+              isSvg ? "object-contain" : "object-cover"
+            } rounded-lg w-full h-auto`}
+            style={{
+              width: width || "100%",
+              height: height || "auto",
+            }}
+            priority={true}
+            placeholder="blur"
+            blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
+          />
+        )}
       </div>
       {caption && (
         <figcaption className="mt-2 text-sm text-gray-600 text-center italic">
