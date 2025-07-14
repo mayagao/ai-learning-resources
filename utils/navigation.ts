@@ -31,22 +31,22 @@ export const getNavigationSections = (): NavigationSection[] => {
       items: [
         {
           title: "Terminologies",
-          href: "/terminologies",
+          href: "/1.1.terminologies",
           order: 1,
         },
         {
           title: "Challenges & Principles",
-          href: "/challenges-and-principles",
-          order: 3,
-        },
-        {
-          title: "Prototype with AI",
-          href: "/prototype-with-ai",
+          href: "/1.2.challenges-and-principles",
           order: 2,
         },
         {
-          title: "Tools",
-          href: "/design-tools",
+          title: "Prototype with AI",
+          href: "/1.3.prototype-with-ai",
+          order: 3,
+        },
+        {
+          title: "Design Tools",
+          href: "/1.4.design-tools",
           order: 4,
         },
       ],

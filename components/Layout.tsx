@@ -20,6 +20,23 @@ export function Layout({
   const hasInitialized = useRef(false);
   const userHasManuallyClosedOnDesktop = useRef(false);
 
+  // Function to get section title from frontmatter
+  const getSectionTitle = (): string | null => {
+    if (!frontmatter?.title) return null;
+
+    // Find the section that contains the current page
+    for (const section of navigationSections) {
+      const pageInSection = section.items.some(
+        (item) => item.title === frontmatter.title
+      );
+      if (pageInSection) {
+        return section.title;
+      }
+    }
+
+    return null;
+  };
+
   // Detect screen size and set initial sidebar state
   useEffect(() => {
     const checkScreenSize = () => {
@@ -106,7 +123,16 @@ export function Layout({
           <div className="overflow-y-auto w-full">
             <div className="max-w-screen-lg mx-auto flex-1 flex flex-row items-start">
               <main className="flex-1 px-4 py-6 md:px-8 pb-12">
-                <div className="pb-12"> {children}</div>
+                <div className="pb-12">
+                  {getSectionTitle() && (
+                    <div className="mb-2">
+                      <span className="text-sm text-zinc-500 font-medium">
+                        {getSectionTitle()}
+                      </span>
+                    </div>
+                  )}
+                  {children}
+                </div>
               </main>
               <SecondaryNav />
             </div>
