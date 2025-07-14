@@ -122,7 +122,7 @@ export function Layout({
         <div className="flex flex-row flex-1 overflow-hidden ">
           <div className="overflow-y-auto w-full">
             <div className="max-w-screen-lg mx-auto flex-1 flex flex-row items-start">
-              <main className="flex-1 px-4 py-6 md:px-8 pb-12">
+              <main className="flex-1 px-4 py-6 lg:px-8 pb-12">
                 <div className="pb-12">
                   {getSectionTitle() && (
                     <div className="mb-2">
