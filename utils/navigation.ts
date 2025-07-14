@@ -40,13 +40,13 @@ export const getNavigationSections = (): NavigationSection[] => {
           order: 2,
         },
         {
-          title: "Prototype with AI",
-          href: "/1.3.prototype-with-ai",
+          title: "Design with AI Tools",
+          href: "/1.3.design-tools",
           order: 3,
         },
         {
-          title: "Design Tools",
-          href: "/1.4.design-tools",
+          title: "Prototype with AI",
+          href: "/1.4.prototype-with-ai",
           order: 4,
         },
       ],

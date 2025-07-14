@@ -49,7 +49,7 @@ export const SecondaryNav: React.FC = () => {
             >
               <a
                 href={`#${heading.id}`}
-                className="hover:text-github-link text-zinc-500 transition-colors"
+                className="hover:text-zinc-900 text-zinc-500 transition-colors"
               >
                 {heading.text}
               </a>
