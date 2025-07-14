@@ -57,6 +57,7 @@
     list-style: none;
     margin-left: 1rem;
     margin-bottom: 1rem;
+    list-style-type: disc;
   }
   main ol {
     list-style: none;
