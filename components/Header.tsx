@@ -57,7 +57,7 @@ export function Header({
   }
 
   return (
-    <header className="py-2 bg-white border-b border-github-border flex items-center px-5 gap-2 flex-shrink-0 sticky top-0 z-20 h-14">
+    <header className="py-2 bg-white border-b border-github-border flex items-center px-2 md:px-8 gap-2 flex-shrink-0 sticky top-0 z-20 h-14">
       <div className="flex items-center gap-2">
         <button
           onClick={onMenuToggle}
