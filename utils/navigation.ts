@@ -57,27 +57,27 @@ export const getNavigationSections = (): NavigationSection[] => {
       items: [
         {
           title: "A Basic Chatbot",
-          href: "/examples/prompt-engineering",
+          href: "/2.1.a-basic-chatbot",
           icon: PaintbrushIcon,
           order: 1,
         },
         {
           title: "Structured Outputs",
-          href: "/examples/prompt-engineering",
+          href: "/2.2.structured-outputs",
           icon: PaintbrushIcon,
-          order: 1,
-        },
-        {
-          title: "Connect to MCP",
-          href: "/examples/image-generation",
-          icon: BeakerIcon,
           order: 2,
         },
         {
-          title: "Computer Use",
-          href: "/examples/workflow-automation",
-          icon: GearIcon,
+          title: "Connect to MCP",
+          href: "/2.3.connect-to-mcp",
+          icon: BeakerIcon,
           order: 3,
+        },
+        {
+          title: "Computer Use",
+          href: "/2.4.computer-use",
+          icon: GearIcon,
+          order: 4,
         },
       ],
     },

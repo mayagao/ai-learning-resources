@@ -90,7 +90,7 @@ export function Sidebar({
           className="flex items-center gap-2 no-underline text-inherit transition-opacity duration-200 hover:opacity-70"
         >
           <MarkGithubIcon size={24} />
-          <h2 className="text-base font-semibold m-0">Design Resources</h2>
+          <h2 className="text-base font-semibold m-0">AI Design Guide</h2>
         </Link>
 
         <button
