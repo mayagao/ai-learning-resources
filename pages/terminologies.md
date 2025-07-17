@@ -72,6 +72,11 @@ Model Context Protocol (MCP) servers act as intermediaries, giving AI models sec
    title="The Model Context Protocol (MCP)"
 /%}
 
+{% image
+   src="/images/terminologies-mcp.png"
+   alt="AI Technology Concept"
+   caption="Quality of the outputs are dictated by models, prompts, and the contexts. " /%}
+
 ## Prompting
 
 Prompting is about crafting instructions to get the best results from AI models. Effective prompts are specific, define roles, clarify objectives, and provide examples, similar to giving clear instructions to a person. Prompting styles vary: creative tasks may need open-ended prompts, while consistent outputs require detailed examples. Techniques like chain-of-thought prompting and few-shot learning help guide model responses. Each model behaves differently, so experimentation is key.
